@@ -31,7 +31,7 @@
 
 
     function Program(date) {
-        this.date = new Date().getFullYear();    
+        this.date = date;    
         this.listOfMovies = [];
     }
 
@@ -44,7 +44,10 @@
         for (var i = 0; i < this.listOfMovies.length; i++) {
             sumLength += this.listOfMovies[i].duration;
         }
-        var result = this.date + ", duration of festival is " + sumLength + " minutes" + "\n";
+
+        var date = this.date;
+        var dateStr = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+        var result = dateStr + ", duration of festival is " + sumLength + " minutes" + "\n";
 
         for (var i = 0; i < this.listOfMovies.length; i++) {
             result += "\t\t" + this.listOfMovies[i].getData() + "\n";
@@ -101,8 +104,10 @@
         return new Movie(title, genre, duration)
     }
 
-    function createProgram(date) {
-        return new Program(date);
+    function createProgram(dateStr) {
+       var date = new Date(dateStr);
+        var program = new Program(date)
+        return program;
     }
     var fest = new Festival("Pacofil");
     var prog1 = createProgram("3 mart 2018");
